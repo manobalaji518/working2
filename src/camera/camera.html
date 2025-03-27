@@ -1,120 +1,34 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Emotion-Based Songs</title>
     <link rel="stylesheet" href="./camera.css" />
-</head>
-<body>
+    <script type="module" src="camera.js"></script>
+  </head>
+  <body>
     <div class="container">
-        <!-- Camera Section -->
-        <div class="camera-section">
-            <h2>Camera</h2>
-            <div class="camera-frame">
-                <video id="webcam" autoplay playsinline></video>
-            </div>
+      <!-- Camera Section -->
+      <div class="camera-section">
+        <h2>Camera</h2>
+        <div class="camera-frame">
+          <video id="webcam" autoplay playsinline></video>
         </div>
-
         <!-- Emotion Detection Button -->
         <div class="emotion-detect">
-            <button id="detectEmotion">Detect Emotion</button>
+          <button id="detectEmotion">Detect Emotion</button>
         </div>
+      </div>
 
-        <!-- Songs Section -->
-        <div class="songs-section">
-            <h2>Emotion-Based Songs</h2>
-            <div id="song-list">
-                <!-- Songs will be dynamically inserted here -->
-            </div>
+      <!-- Songs Section -->
+      <div class="songs-section custom-scrollbar">
+        <h2>Emotion-Based Songs</h2>
+        <div id="song-list">
+          <!-- Songs will be dynamically inserted here -->
         </div>
+      </div>
+      <!--  -->
     </div>
-
-    <script>
-      const accessToken = localStorage.getItem("ACCESS_TOKEN");
-
-      console.log(accessToken);
-      
-        document.getElementById("detectEmotion").addEventListener("click", () => {
-            const detectedEmotion = "Happy"; // Replace this with actual emotion detection logic
-            fetchSongsByEmotion(detectedEmotion);
-        });
-
-        const emotionGenres = {
-            "Happy": ["pop", "dance", "house", "electropop", "funk"],
-            "Sad": ["acoustic", "singer-songwriter", "folk", "blues", "sad"],
-            "Angry": ["rock", "metal", "hardcore", "punk", "heavy-metal"],
-            "Surprised": ["alternative", "experimental", "indie-pop", "dubstep"],
-            "Fearful": ["dark-ambient", "industrial", "soundtrack", "post-rock"],
-            "Disgusted": ["grunge", "garage-rock", "noise", "punk"],
-            "Neutral": ["lo-fi", "chill", "jazz", "classical", "ambient"]
-        };
-
-        async function fetchSongsByEmotion(emotion) {
-            if (!emotionGenres[emotion]) {
-                console.error("Emotion not recognized.");
-                return;
-            }
-
-            const genres = emotionGenres[emotion].join(",");
-            const url = `https://api.spotify.com/v1/search?q=genre%3Apop%2Cdance&type=track`;
-            
-            try {
-              
-                const response = await fetch(url, {
-                    headers: {
-                        "Authorization": `Bearer ${accessToken}`, // Replace with actual token
-                        "Content-Type": "application/json"
-                    }
-                });
-                console.log(response);
-                
-
-                if (!response.ok) {
-                  
-                    throw new Error("Failed to fetch songs");
-                }
-
-                const data = await response.json();
-                displaySongs(data.tracks);
-            } catch (error) {
-              
-                console.error("Error fetching songs:", error);
-            }
-        }
-
-        function displaySongs(tracks) {
-          console.log(tracks);
-          
-            const songContainer = document.getElementById("song-list");
-            songContainer.innerHTML = ""; // Clear previous results
-
-            tracks.forEach(track => {
-                const songItem = document.createElement("div");
-                songItem.classList.add("song");
-
-                songItem.innerHTML = `
-                    <img src="${track.album.images[0].url}" alt="${track.name}" />
-                    <div class="song-info">
-                        <h3>${track.name}</h3>
-                        <p>${track.artists.map(artist => artist.name).join(", ")}</p>
-                    </div>
-                    <span class="duration">${formatDuration(track.duration_ms)}</span>
-                    <audio controls>
-                        <source src="${track.preview_url}" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                `;
-
-                songContainer.appendChild(songItem);
-            });
-        }
-
-        function formatDuration(ms) {
-            const minutes = Math.floor(ms / 60000);
-            const seconds = ((ms % 60000) / 1000).toFixed(0);
-            return `${minutes}:${seconds.padStart(2, '0')}`;
-        }
-    </script>
-</body>
+  </body>
 </html>

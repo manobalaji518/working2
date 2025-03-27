@@ -19,9 +19,6 @@ const onProfileClick = (event) => {
   }
 };
 
-
-
-
 const loadUserProfile = () => {
   return new Promise(async (resolve, reject) => {
     const defaultImage = document.querySelector("#default-image");
@@ -55,8 +52,7 @@ const onPlaylistItemClicked = (event, id) => {
 };
 
 const loadPlaylist = async (endpoint, elementId) => {
-    
-    const {
+  const {
     playlists: { items },
   } = await fetchRequest(endpoint);
   const playlistItemsSection = document.querySelector(`#${elementId}`);
@@ -72,7 +68,7 @@ const loadPlaylist = async (endpoint, elementId) => {
     );
     const [{ url: imageUrl }] = images;
     playlistItem.innerHTML = `<img src="${imageUrl}" alt="${name}" class="rounded mb-2 object-contain shadow" />
-            <h2 class="text-base font-semibold mb-4 truncate">${name}</h2>
+            <h2 class="text-base font-semibold mb-4 truncate bg-cyan-300">${name}0000000000</h2>
             <h3 class="text-sm text-secondary line-clamp-2">${description}</h3>`;
 
     playlistItemsSection.appendChild(playlistItem);
@@ -181,8 +177,8 @@ const setNowPlayingInfo = ({ image, id, name, artistNames }) => {
 };
 
 const loadPlaylistTracks = ({ tracks }) => {
-    console.log(tracks);
-    
+  console.log(tracks);
+
   const trackSections = document.querySelector("#tracks");
   let trackNo = 1;
   const loadedTracks = [];
@@ -268,7 +264,7 @@ const fillContentForPlaylist = async (playlistId) => {
     </section>
     `;
 
-//   console.log(playlist);
+  //   console.log(playlist);
   loadPlaylistTracks(playlist);
 };
 

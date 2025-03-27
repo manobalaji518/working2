@@ -1,110 +1,155 @@
 /* General Styles */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
 body {
-    background-color: #121212;
-    color: white;
+  background-color: #121212;
+  color: white;
 }
 
 /* Container */
 .container {
-    display: flex;
-    width: 100vw;
-    height: 100vh;
+  /* overflow: hidden; */
+  display: flex;
+  /* width: 100vw; */
+  height: 100vh;
 }
 
 /* Camera Section */
 .camera-section {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #181818;
-    padding: 20px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #181818;
+  padding: 20px;
 }
 
 .camera-section h2 {
-    margin-bottom: 15px;
-    font-size: 22px;
-    color: #1DB954;
+  margin-bottom: 15px;
+  font-size: 22px;
+  color: #1db954;
 }
 
 .camera-frame {
-    width: 350px;
-    height: 350px;
-    border-radius: 50%;
-    background-color: #333;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  background-color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 100px;
 }
 
 /* Songs Section */
 .songs-section {
-    width: 50%;
-    padding: 20px;
-    background-color: #181818;
-    display: flex;
-    flex-direction: column;
+  flex-grow: 1;
+  /* width: 50%; */
+  padding: 20px;
+  background-color: #181818;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
 }
 
 .songs-section h2 {
-    margin-bottom: 15px;
-    font-size: 22px;
-    color: #1DB954;
+  margin-bottom: 15px;
+  font-size: 22px;
+  color: #1db954;
+  /* height: 100%; */
+}
+
+.emotion-detect {
+  /* display: flex; */
 }
 
 /* Song List */
 .song-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 /* Song Item */
 .song {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #282828;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #282828;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
 }
 
 .song:hover {
-    background-color: #333;
+  background-color: #333;
 }
 
 .song img {
-    width: 50px;
-    height: 50px;
-    border-radius: 5px;
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
 }
 
 .song-info {
-    flex-grow: 1;
-    margin-left: 15px;
+  flex-grow: 1;
+  margin-left: 15px;
 }
 
 .song-info h3 {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 .song-info p {
-    font-size: 14px;
-    color: #b3b3b3;
+  font-size: 14px;
+  color: #b3b3b3;
 }
 
 /* Duration */
 .duration {
-    font-size: 14px;
-    color: #b3b3b3;
+  font-size: 14px;
+  color: #b3b3b3;
+}
+
+.custom-scrollbar {
+  /* width: 300px;
+  height: 150px; */
+  overflow: auto;
+  /* border: 1px solid #ccc; */
+  padding: 10px;
+}
+
+/* Width of the scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Background of the scrollbar track */
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 10px;
+}
+
+/* Scrollbar thumb (the draggable part) */
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+/* Hover effect on the thumb */
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Firefox support */
+.custom-scrollbar {
+  scrollbar-width: thin; /* thin | auto */
+  scrollbar-color: #888 #f0f0f0; /* thumb color | track color */
 }
