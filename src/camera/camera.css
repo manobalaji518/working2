@@ -153,3 +153,36 @@ body {
   scrollbar-width: thin; /* thin | auto */
   scrollbar-color: #888 #f0f0f0; /* thumb color | track color */
 }
+
+#music-player {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #222;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.player-info {
+  display: flex;
+  align-items: center;
+}
+
+.player-info img {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.player-controls button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  margin: 0 10px;
+}

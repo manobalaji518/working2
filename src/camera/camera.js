@@ -128,29 +128,113 @@ async function fetchSongsByEmotion(emotion) {
 //   }
 // }
 
+//******************************************/
+
+// function displaySongs(tracks) {
+//   console.log(tracks);
+
+//   const songContainer = document.getElementById("song-list");
+//   songContainer.innerHTML = ""; // Clear previous results
+
+//   tracks.forEach((track) => {
+//     const songItem = document.createElement("div");
+//     songItem.classList.add("song");
+
+//     songItem.innerHTML = `
+//             <img src="${track.album.images[0].url}" alt="${track.name}" />
+//             <div class="song-info">
+//                 <h3>${track.name}</h3>
+//                 <p>${track.artists.map((artist) => artist.name).join(", ")}</p>
+//             </div>
+//             <span class="duration">${formatDuration(track.duration_ms)}</span>
+
+//         `;
+
+//     songContainer.appendChild(songItem);
+//   });
+// }
+
+//display songs new start;;
+
+let currentTrackIndex = 0;
+let currentTracks = [];
+let isPlaying = false;
+
 function displaySongs(tracks) {
   console.log(tracks);
-
+  currentTracks = tracks;
   const songContainer = document.getElementById("song-list");
   songContainer.innerHTML = ""; // Clear previous results
 
-  tracks.forEach((track) => {
+  tracks.forEach((track, index) => {
     const songItem = document.createElement("div");
     songItem.classList.add("song");
-
     songItem.innerHTML = `
-            <img src="${track.album.images[0].url}" alt="${track.name}" />
-            <div class="song-info">
-                <h3>${track.name}</h3>
-                <p>${track.artists.map((artist) => artist.name).join(", ")}</p>
-            </div>
-            <span class="duration">${formatDuration(track.duration_ms)}</span>
-            
-        `;
-
+      <img src="${track.album.images[0].url}" alt="${track.name}" />
+      <div class="song-info">
+          <h3>${track.name}</h3>
+          <p>${track.artists.map((artist) => artist.name).join(", ")}</p>
+      </div>
+      <span class="duration">${formatDuration(track.duration_ms)}</span>
+    `;
+    songItem.addEventListener("click", () => playSong(index));
     songContainer.appendChild(songItem);
   });
+
+  updatePlayerUI();
 }
+
+function playSong(index) {
+  currentTrackIndex = index;
+  isPlaying = true;
+  updatePlayerUI();
+}
+
+function updatePlayerUI() {
+  const player = document.getElementById("music-player");
+  if (!currentTracks.length) return;
+
+  const track = currentTracks[currentTrackIndex];
+  player.innerHTML = `
+    <div class="player-info">
+      <img src="${track.album.images[0].url}" alt="${track.name}" />
+      <div>
+        <h3>${track.name}</h3>
+        <p>${track.artists.map((artist) => artist.name).join(", ")}</p>
+      </div>
+    </div>
+    <div class="player-controls">
+      <button onclick="prevSong()">⏮</button>
+      <button onclick="togglePlayPause()">${isPlaying ? "⏸" : "⏵"}</button>
+      <button onclick="nextSong()">⏭</button>
+    </div>
+  `;
+}
+
+function prevSong() {
+  if (currentTrackIndex > 0) {
+    playSong(currentTrackIndex - 1);
+  }
+}
+
+function nextSong() {
+  if (currentTrackIndex < currentTracks.length - 1) {
+    playSong(currentTrackIndex + 1);
+  }
+}
+
+function togglePlayPause() {
+  isPlaying = !isPlaying;
+  updatePlayerUI();
+  console.log(isPlaying ? "Playing" : "Paused");
+}
+
+// Ensure functions are globally accessible
+window.togglePlayPause = togglePlayPause;
+window.nextSong = nextSong;
+window.prevSong = prevSong;
+
+//display songs new end;;;
 
 function formatDuration(ms) {
   const minutes = Math.floor(ms / 60000);
